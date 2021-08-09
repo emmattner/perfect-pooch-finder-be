@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Breed } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -11,6 +11,20 @@ const resolvers = {
       }
 
       throw new AuthenticationError('Not logged in');
+    },
+    allBreeds: async (parent, args, context) => {
+      return await Breed.find({});
+    },
+    findBreed: async (parent, {breed, minWeight}, context) => {
+      console.log({breed, minWeight});
+
+      const breeds = await Breed.find({
+        ...breed && {breed: { "$regex": breed, "$options": "i" }},
+        ...minWeight && { minWeight: { $gt: minWeight }},
+      })
+
+      console.log(breeds);
+      return breeds;
     }
   },
   Mutation: {
@@ -43,7 +57,7 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
   }
 };
 
