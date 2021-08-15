@@ -7,13 +7,11 @@ const typeDefs = gql`
     lastName: String
     email: String
     password: String
-    confirmPassword: String
     age: String
-    livingSpace: String
-    yardSize: String
-    exerciseHours: String
-    foodCost: String
+    temperament: String
     dogSize: String
+    dogType: String
+    foodCost: Int
   }
 
   type Auth {
@@ -24,6 +22,7 @@ const typeDefs = gql`
   type Breed {
     breed: String
     bredFor: String
+    image: String
     minWeight: Float
     maxWeight: Float
     temperament: String
@@ -38,13 +37,13 @@ const typeDefs = gql`
   type Query {
     user: User
     allBreeds: [Breed]
-    findBreed(breed: String, bredFor: String, minWeight: Float, maxWeight: Float, temperament: String, minHeight: Float, maxHeight: Float, group: String, foodLevel: Float, countryOfOrigin: String, lifespan: String): Breed
+    breedsByUser: [Breed]
   }
 
   
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!, confirmPassword: String!, age: String!, livingSpace: String!, yardSize: String!, exerciseHours: String!, foodCost: String!, dogSize: String!): Auth
-    updateUser(firstName: String, lastName: String, email: String, password: String!, confirmPassword: String, age: String, livingSpace: String, yardSize: String, exerciseHours: String, foodCost: String, dogSize: String): User
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!, age: String!, dogType: String!, temperament: String!, foodCost: Int!, dogSize: String!): Auth
+    updateUser(firstName: String, lastName: String, email: String, password: String!, age: String, dogType: String, temperament: String, foodCost: Int, dogSize: String): User
     login(email: String!, password: String!): Auth
   }
 `;
