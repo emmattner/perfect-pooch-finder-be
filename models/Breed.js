@@ -7,6 +7,9 @@ const breedSchema = new Schema({
         type: String,
         trim: true
     },
+    image: {
+        type: String,
+    },
     bredFor: {
         type: String,
     },
@@ -35,7 +38,7 @@ const breedSchema = new Schema({
         type: String,
     },
     lifespan: {
-        type: Number,
+        type: String,
     }
     
 
