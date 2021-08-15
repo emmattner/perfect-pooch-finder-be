@@ -15,17 +15,25 @@ const resolvers = {
     allBreeds: async (parent, args, context) => {
       return await Breed.find({});
     },
-    findBreed: async (parent, {breed, minWeight}, context) => {
-      console.log({breed, minWeight});
+    breedsByUser: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id)
 
-      const breeds = await Breed.find({
-        ...breed && {breed: { "$regex": breed, "$options": "i" }},
-        ...minWeight && { minWeight: { $gt: minWeight }},
-      })
+        const breeds = await Breed.find({
+          $or: [
+            { temperament: { "$regex": user.temperament, "$options": "i" }, },
+            { group: user.dogType, },
+            { minWeight: { $gte: user.dogSize, } },
+            { foodLevel: { $lte: user.foodCost, } },
+          ]
+        })
+        console.log(breeds)
+        return breeds
 
-      console.log(breeds);
-      return breeds;
+
+      }
     }
+
   },
   Mutation: {
     addUser: async (parent, args) => {
