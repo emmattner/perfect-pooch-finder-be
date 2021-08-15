@@ -20,8 +20,8 @@ db.once('open', async () => {
   await User.create({
     firstName: 'Pamela',
     lastName: 'Washington',
-    email: 'pamela@testmail.com',
-    password: 'password12345',
+    email: 'emma@gmail.com',
+    password: '123123123',
   });
 
 
@@ -40,7 +40,7 @@ db.once('open', async () => {
       temperament: breed.temperament,
       minHeight: breed.height.metric.split('-')[0],
       maxHeight: breed.height.metric.split('-')[1],
-      lifespan: breed.lifespan,
+      lifespan: breed.life_span,
       foodLevel,
     })
 
