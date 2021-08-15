@@ -27,19 +27,17 @@ const userSchema = new Schema({
   age: {
     type: String,
   },
-  livingSpace: {
-    type: String,
+  temperament: {
+    type: String, // match to temperament
   },
-  yardSize: {
-    type: String,
+  dogSize: {
+    type: String, // match to weight
   },
-  exerciseHours: {
-    type: String,
-    enum: [0, 1, 2],
+  dogType: {
+    type: String, // match to breed_group 
   },
   foodCost: {
-    type: Number,
-    enum: [1, 2, 3],
+    type: Number // match to foodLevel
   },
 
 });
