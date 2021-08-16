@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
 
 const { typeDefs, resolvers } = require('./schemas');
@@ -13,6 +14,8 @@ const server = new ApolloServer({
   resolvers,
   context: authMiddleware
 });
+
+app.use(cors())
 
 server.applyMiddleware({ app });
 
