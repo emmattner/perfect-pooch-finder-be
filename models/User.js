@@ -31,7 +31,7 @@ const userSchema = new Schema({
     type: String, // match to temperament
   },
   dogSize: {
-    type: String, // match to weight
+    type: Number, // match to weight
   },
   dogType: {
     type: String, // match to breed_group 
